@@ -9,11 +9,3 @@ db.sqlite3
 /ignore_files
 .vscode
 /workspace_django.code-workspaceest.py
-__pycache__
-myvenv
-db.sqlite3
-/static
-.DS_Store
-/ignore_files
-.vscode
-/workspace_django.code-workspace
