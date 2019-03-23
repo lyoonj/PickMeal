@@ -1,6 +1,5 @@
 *.pyc
 *~
-*t.py
 __pycache__
 myvenv
 db.sqlite3
@@ -9,3 +8,4 @@ db.sqlite3
 /ignore_files
 .vscode
 /workspace_django.code-workspaceest.py
+pickmeal/settings.py
