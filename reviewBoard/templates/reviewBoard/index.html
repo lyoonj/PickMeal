@@ -1,0 +1,32 @@
+{% extends 'reviewBoard/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>안뇽</h1>
+
+    <!-- {% for r in restaurants %}
+    
+        <h3>{{ r_restaurant.name }} | {{ r_restaurant.category }}</h3>
+        <p>{{ r.title }}</p>
+        {{ r.photo }}
+
+    {% endfor %} -->
+
+    {% for res in restaurants %}
+    <h3>{{ res.name }} | {{ res.category }}</h3>    
+
+        {% for rev in res.review_set.all %}
+            <h5>{{ rev.title }}</h5>
+            <p>{{ rev.review }}</p>
+
+            <img src="{% static 'reviewBoard/assets/images/pic1.jpg' %'}" alt="은성밥차"><br>
+            
+            url : {{ rev.photo.url }} <br>
+            path : {{ rev.photo.path }} <br>
+
+        {% endfor %}
+
+    {% endfor %}
+
+{% endblock %}

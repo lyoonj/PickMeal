@@ -24,8 +24,9 @@ class Review(models.Model) :
     restaurant = models.ForeignKey(Restaurant, on_delete=models.PROTECT)
 
     title = models.CharField(max_length=50)
-    review = models.TextField(verbose_name="음식점 리뷰")
-    photo = models.ImageField('image_file', upload_to="media/images", blank=True)
+    review = models.TextField()
+    # photo = models.ImageField(upload_to="reviewBoard/images", blank=True)
+    photo = models.ImageField(blank=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
