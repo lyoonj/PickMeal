@@ -14,5 +14,3 @@ def index(request) :
     # restaurants = Review.objects.select_related('restaurant')
     
     return render(request, "reviewBoard/index.html", {'restaurants' : restaurants})
-
-

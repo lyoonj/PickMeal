@@ -25,11 +25,19 @@ class Review(models.Model) :
 
     title = models.CharField(max_length=50)
     review = models.TextField()
-    # photo = models.ImageField(upload_to="reviewBoard/images", blank=True)
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(upload_to="reviewBoard/images", blank=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
+    # def get_photo(self):
+    #     if self.photo :
+    #         return self.photo.url
+    #     else:
+    #         return 'reviewBoard/assets/images/pic1.jpg'
+
+    # def save(self):
+    #     self.photo = self.get_photo()
 
     def __str__(self) :
         return self.title
