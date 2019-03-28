@@ -20,7 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(('randFood.urls', 'randFood'), namespace='randFood')),
+    path('randfood/', include(('randFood.urls', 'randFood'), namespace='randFood')),
     path('', include(('reviewBoard.urls', 'reviewBoard'), namespace='reviewBoard')),
 ]
 

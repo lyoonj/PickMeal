@@ -1,0 +1,26 @@
+{% extends 'reviewBoard/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div style="margin-left:20px; margin-top:20px;">
+
+    <h3>{{review.title}}</h3>
+
+    <br>
+
+    <p>{{ review.review }}</p>
+
+    <br>
+
+    {% if review.photo %}
+        <img src="{{ review.photo.url }}" alt="reviewPhoto" style="width:200px;"><br>
+    {% endif %}
+
+    <br>
+    
+    <a href="../../"> 돌아가기 </a>
+</div>
+
+
+{% endblock %}
