@@ -17,8 +17,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # path('', views.index, name="index"),
     # path('', views.index, name="index"), #FBV #List
-    path('review/<int:pk>/', views.detail, name="review-detail"), #FBV #Detail
+    # path('review/<int:pk>/', views.detail, name="review-detail"), #FBV #Detail
     path('', views.ReviewListView.as_view(), name="index"), #CBV #List
-    # path('review/<int:pk>/', views.ReviewDetailView.as_view(), name="review-detail"), #CBV #Detail
+    path('review/<int:pk>/', views.ReviewDetailView.as_view(), name="review-detail"), #CBV #Detail
 ]

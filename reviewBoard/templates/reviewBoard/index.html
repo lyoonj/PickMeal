@@ -12,14 +12,14 @@
     <!-- Restaurant -->
     {% for res in restaurants %}
     <hr>
-    <h3><strong>{{ res.name }} | {{ res.category }}</strong>></h3>    
+    <h3><strong>{{ res.name }} | {{ res.category }}</strong></h3>    
     
     <br>
 
         <!-- Review -->
         {% for rev in res.review_set.all %}
 
-            <a href={% url 'reviewBoard:review-detail' rev.id %}>{{ rev.title }} | {{rev.updated_date}}</a> 
+            <a href={% url 'reviewBoard:review-detail' rev.pk %}>{{ rev.title }} | {{rev.updated_date}}</a> 
             
             <br>
             <br>
