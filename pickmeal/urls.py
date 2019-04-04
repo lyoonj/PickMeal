@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')), # 이게 없으면 login 페이지에 접근할 수 없다. 
     path('admin/', admin.site.urls),
     path('randfood/', include(('randFood.urls', 'randFood'), namespace='randFood')),
     path('', include(('reviewBoard.urls', 'reviewBoard'), namespace='reviewBoard')),

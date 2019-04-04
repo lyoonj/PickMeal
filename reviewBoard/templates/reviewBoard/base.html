@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Montserrat:200,300,400,500" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
     <!-- <link rel="favicon" href="{% static 'reviewBoard/assets/icons/favicon.ico' %}"> -->
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'reviewBoard/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'reviewBoard/css/spacing.css' %}">
+
 
     <title>Pick Meal</title>
 
@@ -16,6 +18,32 @@
 
   <body>
 
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <!-- index라고 쓰면 error, reviewBoard:index라고 써야 함. -->
+          <a class="nav-link active" href="{% url 'reviewBoard:index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pick Meal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reviewBoard:index' %}">Review</a>
+        </li>
+        {% if user.is_active %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">{{user.username}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'login' %}"> Login</a>
+        </li>
+        {% endif %}
+      </ul>
+
+  
     {% block content %}
     {% endblock %}
 

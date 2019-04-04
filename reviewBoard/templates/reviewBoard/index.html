@@ -3,29 +3,45 @@
 
 {% block content %}
 
-<div style="margin-left:20px; margin-top:20px;">
     <h1>한양대 에리카 맛집 리뷰</h1>
-
 
     {% if restaurants %}
 
+
+
     <!-- Restaurant -->
     {% for res in restaurants %}
+
+    <div class="container" style="margin-left:20px; margin-top:20px;">
+        
     <hr>
-    <h3><strong>{{ res.name }} | {{ res.category }}</strong>></h3>    
+
+    <h3><strong>{{ res.name }} | {{ res.category }}</strong></h3>    
     
     <br>
 
         <!-- Review -->
         {% for rev in res.review_set.all %}
-
-            <a href={% url 'reviewBoard:review-detail' rev.id %}>{{ rev.title }} | {{rev.updated_date}}</a> 
+        <div class="row">
+            <!-- <a href={% url 'reviewBoard:review-detail' rev.id %}>{{ rev.title }} | {{rev.updated_date}}</a>  -->
             
             <br>
             <br>
-
+            <div class="card" style="width: 18rem; margin-right: 3rem; margin-bottom:2rem;">
+                {% if rev.photo %}
+                    <img src="{{ rev.photo.url }}" alt="reviewPhoto" class="card-img-top"><br>
+                {% endif %}
+                    <div class="card-body">
+                      <a class="card-text" href={% url 'reviewBoard:review-detail' rev.id %}>
+                          {{ rev.title }} <br>- {{rev.updated_date}}
+                        </a>
+                    </div>
+            </div>
             <!-- review for문 -->
             {% endfor %}
+            <br>
+            <br>
+        </div>
 
         <!-- restaurants for문 -->
         {% endfor %}
@@ -33,4 +49,5 @@
     {% endif %}
 
 </div>
+
 {% endblock %}
