@@ -1,7 +1,8 @@
-.card {
-    box-shadow: 1px 4px 14px 0px;
+.box-shadow {
+    box-shadow: 0 4px 11px rgba(0,0,0,0.1) !important;
 }
-/* 
-.restaurants_list {
-    
-} */
+
+.review-thumb {
+    width: 400px;
+    height:300px;
+}

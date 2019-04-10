@@ -3,51 +3,77 @@
 
 {% block content %}
 
-    <h1>한양대 에리카 맛집 리뷰</h1>
-
-    {% if restaurants %}
-
-
-
-    <!-- Restaurant -->
-    {% for res in restaurants %}
-
-    <div class="container" style="margin-left:20px; margin-top:20px;">
+    <!-- Container -->
+    <div class="jumbotron jumbotron-fluid">
         
-    <hr>
+        <div class="container text-center">
+          <p> {% now "Y년 F j일" %} </p>
+          <h1 class="display-5 ">한양대 에리카 맛집 베스트 3</h1>
+          <p class="lead">여러분의 맛집을 리뷰해주세요! :)</p>
+              
+          
+          <!-- Review 작성하기 -->
+          <div class="mt-3">
+            <a href="{% url 'reviewBoard:review_new' %}"> 
+                <button type="button" class="btn btn-dark fw-300 fs-15"> 리뷰 작성하기 </button>                              
+            </a>
+          </div>
+        </div>
+      </div>
 
-    <h3><strong>{{ res.name }} | {{ res.category }}</strong></h3>    
-    
+    <!-- Contents -->
+    {% if restaurants %}
+    <!-- Restaurant -->
+
+    {% for res in restaurants %}
+    <div class="container mt-5">
+
+        <!-- Restaurant -->
+        <div class="text-center">
+            <h3 class="mt-3"><strong>{{ res.name }} | {{ res.category }}</strong></h3>
+            <p>{{ res.location }}</p>    
+        </div>
     <br>
+    
 
         <!-- Review -->
         {% for rev in res.review_set.all %}
-        <div class="row">
-            <!-- <a href={% url 'reviewBoard:review-detail' rev.id %}>{{ rev.title }} | {{rev.updated_date}}</a>  -->
-            
-            <br>
-            <br>
-            <div class="card" style="width: 18rem; margin-right: 3rem; margin-bottom:2rem;">
-                {% if rev.photo %}
-                    <img src="{{ rev.photo.url }}" alt="reviewPhoto" class="card-img-top"><br>
-                {% endif %}
-                    <div class="card-body">
-                      <a class="card-text" href={% url 'reviewBoard:review-detail' rev.id %}>
-                          {{ rev.title }} <br>- {{rev.updated_date}}
-                        </a>
-                    </div>
-            </div>
+        <div class="mt-3 container d-flex justify-content-start" >
+            {% if rev.photo %}
+                    <a href={% url 'reviewBoard:review-detail' rev.id %}></a>
+                        <img src="{{ rev.photo.url }}" alt="reviewPhoto" class="img-thumbnail rounded review-thumb">
+                    </a>
+                    <br>
+                    {% endif %}
+                        <div class="ml-3">
+                          <a href={% url 'reviewBoard:review-detail' rev.id %} 
+                             style="color:gray; text-decoration: none;">
+                              <h2>{{ rev.title }} </h2>
+                            </a>
+                            
+                            <p>{{rev.updated_date | date}}</p>
+                            <p> 평점 : {{ rev.score }}</p>
+
+                            <p> {{rev.review |truncatechars:100 }}</p>
+                            <a href="{% url 'reviewBoard:review-detail' rev.id %} "> 자세히 보기 </a>
+            {% if user.is_authenticated %}
+            <a class="ml-3" 
+                href="{% url 'reviewBoard:review_edit' rev.id %}">
+                <button class="btn btn-outline-dark">
+                    수정하기
+                </button>
+            </a>
+            {% endif %}
+                        </div>
+        </div>
             <!-- review for문 -->
             {% endfor %}
-            <br>
-            <br>
-        </div>
+        <hr>
 
         <!-- restaurants for문 -->
         {% endfor %}
-
+    
+    </div>
     {% endif %}
-
-</div>
 
 {% endblock %}

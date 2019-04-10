@@ -1,0 +1,65 @@
+{% extends 'reviewBoard/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- Review Form -->
+    <form class="jumbotron" 
+        method="POST" 
+        action="{% url 'reviewBoard:review_edit' review.id %}">{% csrf_token %}
+            
+        <h3>리뷰 추가하기</h3><hr>
+
+        <div class="form-group row mt-5">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">식당</label>
+                <div class="col-sm-10 ">
+                    {{ form.restaurant }} 
+                    
+                    <button class="btn btn-link ml-5" 
+                            type="button" 
+                            data-toggle="collapse" 
+                            data-target=".multi-collapse" 
+                            aria-expanded="false" 
+                            aria-controls="ReviewForm RestaurantForm"
+                            >
+                    </button>
+                </div>
+        </div>
+    
+        <div class="form-group row">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">제목</label>
+                <div class="col-sm-10 ">
+                    {{ form.title }} 
+                </div>
+        </div>
+    
+        <div class="form-group row ">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">평점</label>
+                <div class="col-sm-10 ">
+                    {{ form.score }} 
+                </div>
+        </div>
+    
+        <div class="form-group row ">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">리뷰</label>
+                <div class="col-sm-10 ">
+                    {{ form.review }} 
+                </div>
+        </div>
+    
+        <div class="form-group row ">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">사진</label>
+                <div class="col-sm-10 ">
+                    {{ form.photo }} 
+                </div>
+        </div>
+            
+            <button class="btn btn-info mt-3" value='action' name='ReviewForm' type="submit">리뷰 수정하기</button>
+        </form>
+
+</div>
+
+{% endblock %}

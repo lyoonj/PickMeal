@@ -3,24 +3,23 @@
 
 {% block content %}
 
-<div style="margin-left:20px; margin-top:20px;">
+<div class="container mt-5">
 
-    <h3>{{review.title}}</h3>
+        <h3>{{review.title}}</h3>
 
-    <br>
+        <br>
 
-    <p>{{ review.review }}</p>
+        <p>{{ review.review }}</p>
 
-    <br>
+        <br>
 
-    {% if review.photo %}
-        <img src="{{ review.photo.url }}" alt="reviewPhoto" style="width:200px;"><br>
-    {% endif %}
+        {% if review.photo %}
+            <img src="{{ review.photo.url }}" alt="reviewPhoto" style="width:200px;"><br>
+        {% endif %}
 
-    <br>
+        <br>
 
-    <a href="../../"> 돌아가기 </a>
+        <a href="../../"> 돌아가기 </a>
 </div>
-
 
 {% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'reviewBoard/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container mt-5">
+
+<!-- Review Form -->
+<form id="ReviewForm" 
+    class="jumbotron collapse show multi-collapse" 
+    method="POST" 
+    enctype="multipart/form-data"
+    action="{% url 'reviewBoard:review_new' %}">{% csrf_token %}
+        
+    <h3>리뷰 추가하기</h3><hr>
+
+    <div class="form-group row mt-5">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">식당</label>
+            <div class="col-sm-10 ">
+                {{ forms.ReviewForm.restaurant }} 
+                
+                <button class="btn btn-link ml-5" 
+                        type="button" 
+                        data-toggle="collapse" 
+                        data-target=".multi-collapse" 
+                        aria-expanded="false" 
+                        aria-controls="ReviewForm RestaurantForm"
+                        >
+                            맛집이 리스트에 없나요?
+                </button>
+            </div>
+    </div>
+
+    
+
+    <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">제목</label>
+            <div class="col-sm-10 ">
+                {{ forms.ReviewForm.title }} 
+            </div>
+    </div>
+
+    <div class="form-group row ">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">평점</label>
+            <div class="col-sm-10 ">
+                {{ forms.ReviewForm.score }} 
+            </div>
+    </div>
+
+    <div class="form-group row ">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">리뷰</label>
+            <div class="col-sm-10 ">
+                {{ forms.ReviewForm.review }} 
+            </div>
+    </div>
+
+    <div class="form-group row ">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">사진</label>
+            <div class="col-sm-10 ">
+                {{ forms.ReviewForm.photo }} 
+            </div>
+    </div>
+        
+        <button class="btn btn-info mt-3" value='action' name='ReviewForm' type="submit">리뷰 추가하기</button>
+    </form>
+   
+<!-- Restaurant Form -->
+<form id="RestaurantForm" 
+    class="jumbotron collapse multi-collapse"
+    method="POST" 
+    action="{% url 'reviewBoard:review_new' %}">{% csrf_token %}
+    
+    <h3>맛집 추가하기</h3><hr>
+
+    <div class="form-group row mt-5">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">식당 이름</label>
+            <div class="col-sm-10 ">
+                {{ forms.RestaurantForm.name }} 
+            </div>
+        </div>
+    
+        <div class="form-group row ">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">카테고리</label>
+            <div class="col-sm-10 ">
+                {{ forms.RestaurantForm.category }} 
+            </div>
+        </div>
+    
+        <div class="form-group row ">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">식당 위치</label>
+            <div class="col-sm-10 ">
+                {{ forms.RestaurantForm.location }} 
+            </div>
+        </div>
+    <button class="btn btn-info mt-3" value='action' name='RestaurantForm' type="submit">식당 추가하기</button>
+</form>
+
+
+</div>
+
+{% endblock %}
