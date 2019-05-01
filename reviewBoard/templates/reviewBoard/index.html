@@ -8,9 +8,8 @@
         
         <div class="container text-center">
           <p> {% now "Y년 F j일" %} </p>
-          <h1 class="display-5 ">한양대 에리카 맛집 베스트 3</h1>
+          <h1 class="display-5 ">한양대 에리카 맛집 리스트</h1>
           <p class="lead">여러분의 맛집을 리뷰해주세요! :)</p>
-              
           
           <!-- Review 작성하기 -->
           <div class="mt-3">
@@ -54,7 +53,7 @@
                             <p>{{rev.updated_date | date}}</p>
                             <p> 평점 : {{ rev.score }}</p>
 
-                            <p> {{rev.review |truncatechars:100 }}</p>
+                            <p> {{rev.review | truncatechars:100 }}</p>
                             <a href="{% url 'reviewBoard:review-detail' rev.id %} "> 자세히 보기 </a>
             {% if user.is_authenticated %}
             <a class="ml-3" 

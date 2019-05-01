@@ -7,7 +7,6 @@
     <!-- CSS dependencies : Bootstrap & Local -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Montserrat:200,300,400,500" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
-    <!-- <link rel="favicon" href="{% static 'reviewBoard/assets/icons/favicon.ico' %}"> -->
     <link rel="stylesheet" href="{% static 'reviewBoard/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'reviewBoard/css/spacing.css' %}">
 
@@ -29,7 +28,7 @@
               <a class="nav-link active" href="{% url 'reviewBoard:index' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pick Meal</a>
+              <a class="nav-link" href="{% url 'randFood:index' %}">Pick Meal</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'reviewBoard:index' %}">Review</a>
@@ -64,6 +63,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
-  
-    <!-- <script src="{% static 'css/js/nav.js' %}"></script> -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+    <script src="{% static 'reviewBoard/js/roulette.js' %}"></script>
+
 </html>

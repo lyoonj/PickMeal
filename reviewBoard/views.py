@@ -1,10 +1,13 @@
+# View, Render
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
+# Login Required Decorator
 from django.utils.decorators import method_decorator
 from django.contrib.auth import views, models, login, decorators 
 from django.contrib.auth.decorators import login_required 
 
+# model, form
 from .models import Restaurant, Review
 from .forms import UserForm, ReviewForm, RestaurantForm
 
@@ -45,6 +48,26 @@ class ProcessMultipleFormsView(ProcessFormView):
         forms = self.get_forms(form_classes)
         return self.render_to_response(self.get_context_data(forms=forms))
 
+    def post(self, request, *args, **kwargs):
+        form_classes = self.get_form_classes()
+        forms = self.get_forms(form_classes)
+
+        # form의 'name' 값에 따라서 제출되는 폼이 달라진다.
+        if 'ReviewForm' in request.POST:
+            form_class = self.form_classes['ReviewForm']
+            form_name = 'ReviewForm'
+        else:
+            form_class = self.form_classes['RestaurantForm']
+            form_name = 'RestaurantForm'
+
+        # 둘 중 제출된 폼에 따라 form 변수에 저장
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else: 
+            return self.render_to_response(self.get_context_data(forms=forms))
+
 
 class BaseMultipleFormsView(MultipleFormsMixin, ProcessMultipleFormsView):
     """
@@ -55,9 +78,6 @@ class MultipleFormsView(TemplateResponseMixin, BaseMultipleFormsView):
     """
     A view for displaing several forms, and rendering a template response.
     """
-
-
-
 
 
 #################### Class Based View ####################
@@ -78,7 +98,7 @@ class ReviewCreateView(CreateView, MultipleFormsView):
     model = Review
     fields = ('writer','restaurant', 'score', 'title', 'review', 'photo')
     template_name = 'reviewBoard/review_new.html'
-    success_url = "/"
+    success_url = '/'
     form_classes = {'ReviewForm': ReviewForm,
                     'RestaurantForm': RestaurantForm}
 
@@ -86,11 +106,6 @@ class ReviewCreateView(CreateView, MultipleFormsView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ReviewCreateView, self).dispatch(*args, **kwargs)
-
-
-    def form_valid(self, form):
-        form.instance.created_by = self.request.user
-        return super().form_valid(form)
 
     def get_review_initial(self):
         return {'title':'title test',
@@ -103,31 +118,6 @@ class ReviewCreateView(CreateView, MultipleFormsView):
         return {'name':'restaurant name',
                 'location': 'somewhere',
                 'category':'한식'}
-
-    def get_context_data(self, **kwargs):
-        context = super(ReviewCreateView, self).get_context_data(**kwargs)
-        context.update({"ReviewForm": 'test',
-                        "RestaurantForm": 'test'})
-        return context
-
-    def post(self, request, *args, **kwargs):
-        # form의 'name' 값에 따라서 제출되는 폼이 달라진다.
-        if 'ReviewForm' in request.POST:
-            form_class = self.form_classes['ReviewForm']
-            form_name = 'ReviewForm'
-
-        else:
-            form_class = self.form_classes['RestaurantForm']
-            form_name = 'RestaurantForm'
-
-        # 둘 중 제출된 폼에 따라 form 변수에 저장
-        form = self.get_form(form_class)
-
-        if form.is_valid():
-            return self.form_valid(form)
-        else: 
-            return self.form_invalid(**{form_name: form})
-
 
 class ReviewUpdateView(UpdateView):
     model = Review

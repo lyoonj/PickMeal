@@ -1,6 +1,8 @@
 from django import forms 
-from .models import Review, Restaurant
+from django.db import models
 from django.contrib.auth.models import User
+
+from .models import Review, Restaurant
 
 class RestaurantForm(forms.ModelForm):
     class Meta:
