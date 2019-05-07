@@ -11,8 +11,17 @@ from django.contrib.auth.decorators import login_required
 from .models import Restaurant, Review
 from .forms import UserForm, ReviewForm, RestaurantForm
 
+# Serializer 
+from rest_framework import viewsets
+from rest_framework import ListCreateAPIView
+from rest_framework import RetrieveUpdateDestroyAPIView
+from .serializers import RestaurantSerializer, ReviewSerializer
+import json
 
-#################### Mixins ####################
+# ===================================
+# Mixins
+# ===================================
+
 from django.views.generic.base import View, TemplateResponseMixin
 from django.views.generic.edit import FormMixin, ProcessFormView
 
@@ -80,7 +89,10 @@ class MultipleFormsView(TemplateResponseMixin, BaseMultipleFormsView):
     """
 
 
-#################### Class Based View ####################
+# ===================================
+# Class Based View
+# ===================================
+
 # List
 class ReviewListView(ListView) :
     model = Restaurant
@@ -139,4 +151,7 @@ class UserCreateView(CreateView):
     success_url = "/"
 
 
+# ===================================
+# Serializer
+# ===================================
 
