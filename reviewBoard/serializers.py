@@ -12,6 +12,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta : 
         model = Review
         fields = ('restaurant', 
+                  'id',
                   'score', 
                   'title',
                   'review',)

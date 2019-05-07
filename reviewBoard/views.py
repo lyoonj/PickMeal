@@ -13,8 +13,10 @@ from .forms import UserForm, ReviewForm, RestaurantForm
 
 # Serializer 
 from rest_framework import viewsets
-from rest_framework import ListCreateAPIView
-from rest_framework import RetrieveUpdateDestroyAPIView
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.response import Response
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from .serializers import RestaurantSerializer, ReviewSerializer
 import json
 
@@ -154,4 +156,20 @@ class UserCreateView(CreateView):
 # ===================================
 # Serializer
 # ===================================
+class ReviewCreateReadView(ListCreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
+class ReviewReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+class RestaurantCustomAPIView(ListCreateAPIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'reviewBoard/review_rest_api.html'
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
+
+    def get(self, request):
+        queryset = Restaurant.objects.all()
+        return Response({'restaurants':queryset})

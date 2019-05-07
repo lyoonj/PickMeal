@@ -18,12 +18,33 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Login
     path('login/', auth_views.LoginView.as_view(), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+
+    # Index
     path('', views.ReviewListView.as_view(), name="index"), #CBV #List
     path('review/<int:pk>/', views.ReviewDetailView.as_view(), name="review-detail"), #CBV #Detail
 
+    # Create, Update
     path('join/', views.UserCreateView.as_view(), name='join'),
     path('review/new/', views.ReviewCreateView.as_view(), name='review_new'),
     path('review/<int:pk>/edit/', views.ReviewUpdateView.as_view(), name='review_edit'),
+
+    # Rest API
+    path(
+        'api/v1/reviews/', 
+        views.ReviewCreateReadView.as_view(),
+        name='review_rest_api'
+        ),
+    path(
+        'api/v1/review/<int:pk>/',
+        views.ReviewReadUpdateDeleteView.as_view(),
+        name='review_rest_api'
+    ),
+    path(
+        'api/v1/restaurants/',
+        views.RestaurantCustomAPIView.as_view(),
+        name='restaurant_rest_api'
+    ),
 ]

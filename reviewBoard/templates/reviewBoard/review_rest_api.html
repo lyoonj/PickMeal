@@ -1,0 +1,31 @@
+{% extends 'reviewBoard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid pl-5"> 
+
+    <h1 class="display-5">Restaurant API View</h1>
+
+    <br>
+    <br>
+
+
+    {% for r in restaurants %}
+    <br>
+
+
+    <p>id : {{r.id}}</p>
+    <p>restaurant : {{r.name}}</p>
+    <p>location : {{r.location}}</p>
+    <p>category : {{r.category}}</p>
+
+    <br>
+    <hr>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+
